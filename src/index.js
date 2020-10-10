@@ -3,6 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import firebase from 'firebase';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB-JrVRWfhO3LSqoNJyblW37Swb-OA43Ug",
+  authDomain: "notesa-app-v2.firebaseapp.com",
+  databaseURL: "https://notesa-app-v2.firebaseio.com",
+  projectId: "notesa-app-v2",
+  storageBucket: "notesa-app-v2.appspot.com",
+  messagingSenderId: "523471668039",
+  appId: "1:523471668039:web:69eb6c1664476eadcc4262",
+  measurementId: "G-R29M72EC66"
+};
+
+firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
