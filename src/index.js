@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import firebase from 'firebase';
+import { Provider } from 'react-redux';
+import store from './store';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB-JrVRWfhO3LSqoNJyblW37Swb-OA43Ug",
@@ -18,10 +20,14 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+window.store = store;
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 
