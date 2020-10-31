@@ -41,7 +41,7 @@ const RegisterPage = (props) => {
               type="text" 
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              placeholder="firstName"
+              placeholder="First Name"
             />
 
             <input 
@@ -49,7 +49,7 @@ const RegisterPage = (props) => {
               type="text" 
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              placeholder="lastName"
+              placeholder="Last Name"
             />
 
             <input 
