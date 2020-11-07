@@ -1,6 +1,7 @@
-import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
-import './style.css'
+import React from 'react';
+import { NavLink, Link } from 'react-router-dom';
+import './style.css';
+import { useSelector } from 'react-redux';
 
 /**
 * @author
@@ -8,21 +9,39 @@ import './style.css'
 **/
 
 const Header = (props) => {
+
+  const auth = useSelector(state => state.auth);
+
   return(
     <header className="header">
       <div style={{ display: 'flex' }}>
         <div className="logo">Notesa App</div>
-        <ul className="leftMenu">
-          <li><NavLink to={'/signin'}>Login</NavLink></li>
-          <li><NavLink to={'/signup'}>Register</NavLink></li>
-        </ul>
+
+        {
+          !auth.authenticated ?
+          <ul className="leftMenu">
+            <li><NavLink to={'/signin'}>Login</NavLink></li>
+            <li><NavLink to={'/signup'}>Register</NavLink></li>
+          </ul> : null
+        }
+
       </div>
-      <div style={{ margin: '20px 0', color: '#fff', fontWeight: 'bold' }}>Hi, Ady</div>
+      
+      <div style={{ margin: '20px 0', color: '#fff', fontWeight: 'bold' }}>
+        { auth.authenticated ? `Hi, ${auth.firstName} ${auth.lastName}` : '' }
+      </div>
+
       <ul className="menu">
-        <li>
-          <Link to="#" onclick={ props.logout }>Logout</Link>
-        </li>
+
+        {
+          auth.authenticated ? 
+          <li>
+            <Link to={"#"} onClick={ props.logout }>Logout</Link>
+          </li> : null
+        }
+
       </ul>
+
     </header>
   )
 

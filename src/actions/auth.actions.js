@@ -1,10 +1,11 @@
 import { auth, firestore } from 'firebase';
+import { authConstants } from './constants';
 
 export const signup = (user) => {
   return async (dispatch) => {
     const db = firestore();
 
-    dispatch({ type: `${auth.Constants.USER_LOGIN}_REQUEST` });
+    dispatch({ type: `${authConstants.USER_LOGIN}_REQUEST` });
 
     auth()
     .createUserWithEmailAndPassword(user.email, user.password)
@@ -34,14 +35,14 @@ export const signup = (user) => {
           localStorage.setItem('user', JSON.stringify(loggedInUser));
           console.log('User logged in successfully!');
           dispatch({
-            type: `${auth.Constants.USER_LOGIN}_SUCCESS`,
+            type: `${authConstants.USER_LOGIN}_SUCCESS`,
             payload: { user: loggedInUser }
           })
         })
         .catch(error => {
           console.log(error);
           dispatch({ 
-            type: `${auth.Constants.USER_LOGIN}_FAILURE`,
+            type: `${authConstants.USER_LOGIN}_FAILURE`,
             payload: { error }
           });
         })
@@ -50,5 +51,44 @@ export const signup = (user) => {
     .catch(error => {
       console.log(error);
     })
+  }
+}
+
+export const signin = (user) => {
+  return async dispatch => {
+    dispatch({ type: `${authConstants.USER_LOGIN}_REQUEST`});
+
+    console.log(user);
+    auth()
+    .signInWithEmailAndPassword(user.email, user.password)
+    .then((data) => {
+      console.log(data);
+
+      const name = data.user.displayName.split(" ");
+      const firstName = name[0];
+      const lastName = name[1];
+
+      const loggedInUser = {
+        firstName,
+        lastName,
+        uid: data.user.uid,
+        email: data.user.email
+      }
+
+      localStorage.setItem('user', JSON.stringify(loggedInUser));
+
+      dispatch({
+        type: `${authConstants.USER_LOGIN}_SUCCESS`,
+        payload: { user: loggedInUser }
+      });
+
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: `${authConstants.USER_LOGIN}_FAILURE`,
+        payload: { err }
+      })
+    });
   }
 }

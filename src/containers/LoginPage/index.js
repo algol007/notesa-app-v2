@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
-import Layout from '../../components/Layout'
-import Card from '../../components/UI/Card'
-import './style.css'
+import React, { useState } from 'react';
+import Layout from '../../components/Layout';
+import Card from '../../components/UI/Card';
+import './style.css';
+import { signin } from '../../actions/auth.actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 /**
 * @author
@@ -12,12 +15,34 @@ const LoginPage = (props) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth);
+
+  const userLogin = (e) => {
+    e.preventDefault();
+
+    if(email === "") {
+      alert("email is required!");
+      return;
+    }
+    if(password === "") {
+      alert("password is required!");
+      return;
+    }
+
+    dispatch(signin({ email, password }));
+  }
+
+  if(auth.authenticated) {
+    return <Redirect to={'/'} />
+  }
+
 
   return(
     <Layout>
       <div className="loginContainer">
         <Card>
-          <form>
+          <form onSubmit={userLogin}>
 
             <input 
               name="email"
