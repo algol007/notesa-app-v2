@@ -22,7 +22,8 @@ export const signup = (user) => {
           firstName: user.firstName,
           lastName: user.lastName,
           uid: data.user.uid,
-          createdAt: new Date()
+          createdAt: new Date(),
+          isOnline: true
         })
         .then(() => {
           // successfully
@@ -90,5 +91,46 @@ export const signin = (user) => {
         payload: { err }
       })
     });
+  }
+}
+
+export const isLoggedInUser = () => {
+  return async dispatch => {
+    const user =  localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+    if(user) {
+      dispatch({
+        type: `${authConstants.USER_LOGIN}_SUCCESS`,
+        payload: { user }
+      })
+    } else {
+      dispatch({
+        type: `${authConstants.USER_LOGIN}_FAILURE`,
+        payload: { error: 'You are not logged in' }
+      })
+    }
+
+  }
+}
+
+export const logout = () => {
+  return async dispatch => {
+    dispatch({
+      type: `${authConstants.USER_LOGOUT}_REQUEST`
+    });
+
+    auth().signOut()
+    .then(() => {
+      localStorage.clear();
+      dispatch({
+        type: `${authConstants.USER_LOGOUT}_SUCCESS`
+      })
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: `${authConstants.USER_LOGOUT}_FAILURE`,
+        payload: { err }
+      })
+    })
   }
 }
