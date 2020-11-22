@@ -22,8 +22,8 @@ const Header = (props) => {
         {
           !auth.authenticated ?
           <ul className="leftMenu">
-            <li><NavLink to={'/signin'}>Login</NavLink></li>
-            <li><NavLink to={'/signup'}>Register</NavLink></li>
+            <li><NavLink to={'/login'}>Login</NavLink></li>
+            <li><NavLink to={'/register'}>Register</NavLink></li>
           </ul> : null
         }
 
@@ -39,7 +39,7 @@ const Header = (props) => {
           auth.authenticated ? 
           <li>
             <Link to={"#"} onClick={() => {
-              dispatch(logout())
+              dispatch(logout(auth.uid))
             }}>Logout</Link>
           </li> : null
         }

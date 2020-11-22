@@ -1,18 +1,21 @@
 import { userConstants } from './constants';
 import { firestore } from 'firebase';
 
-export const getRealtimeUsers = () => {
+export const getRealtimeUsers = (uid) => {
   return async (dispatch) => {
     dispatch({
       type: `${userConstants.GET_REALTIME_USERS}_REQUEST`
     });
 
     const db = firestore();
-    db.collection('users')
+    const unsubscribe = db.collection('users')
+    // .where("uid", "!=", uid)
     .onSnapshot((querySnapshot) => {
       const users = [];
       querySnapshot.forEach(function(doc) {
-        users.push(doc.data());
+        if(doc.data().uid != uid) {
+          users.push(doc.data());
+        }
       });
       // console.log(users);
 
@@ -21,6 +24,8 @@ export const getRealtimeUsers = () => {
         payload: { users }
       })
     });
+
+    return unsubscribe;
 
   }
 }

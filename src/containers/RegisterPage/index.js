@@ -75,7 +75,7 @@ const RegisterPage = (props) => {
             />
 
             <div>
-              <button>Login</button>
+              <button>Register</button>
             </div>
 
           </form>
