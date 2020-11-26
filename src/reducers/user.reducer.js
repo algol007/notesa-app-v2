@@ -7,6 +7,7 @@ const initState = {
 
 export default (state = initState, action) => {
 
+  // eslint-disable-next-line default-case
   switch(action.type) {
     case `${userConstants.GET_REALTIME_USERS}_REQUEST`:
       break;
