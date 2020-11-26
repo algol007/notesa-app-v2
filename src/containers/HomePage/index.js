@@ -74,6 +74,7 @@ const HomePage = (props) => {
 
   const submitMessage = (e) => {
     const msgObj = {
+      id: Date.now(),
       user_uid_1: auth.uid,
       user_uid_2: userUid,
       message
@@ -85,8 +86,6 @@ const HomePage = (props) => {
         setMessage('')
       })
     }
-
-    console.log(msgObj)
   }
 
   return(
@@ -114,7 +113,7 @@ const HomePage = (props) => {
           {
             chatStarted ?
             user.conversations.map(conv => 
-              <div key={conv.uid} style={{ textAlign: conv.user_uid_1 == auth.uid ? 'right' : 'left' }}>
+              <div key={conv.id} style={{ textAlign: conv.user_uid_1 == auth.uid ? 'right' : 'left' }}>
                   <p className="messageStyle" >{conv.message}</p>
               </div>            
             ) : null

@@ -42,7 +42,7 @@ export const updateMessage = (msgObj) => {
       createdAt: new Date()
     })
     .then(data => {
-      console.log(data)
+      // console.log(data)
     })
     .catch(error => {
       console.log(error)
@@ -87,7 +87,7 @@ export const getRealtimeConversations = (user) => {
 
       })
 
-      console.log(conversations);
+      // console.log(conversations);
     })
   }
 }

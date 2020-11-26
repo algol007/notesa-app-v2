@@ -11,7 +11,7 @@ const initState = {
 
 export default (state = initState, action) => {
 
-  console.log(action);
+  // console.log(action);
 
   switch(action.type) {
 
@@ -50,7 +50,6 @@ export default (state = initState, action) => {
         error: action.payload.error
       }
       break;    
-    
   }
 
   return state

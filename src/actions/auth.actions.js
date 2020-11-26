@@ -36,7 +36,7 @@ export const signup = (user) => {
             email: user.email
           }
           localStorage.setItem('user', JSON.stringify(loggedInUser));
-          console.log('User logged in successfully!');
+          // console.log('User logged in successfully!');
           dispatch({
             type: `${authConstants.USER_LOGIN}_SUCCESS`,
             payload: { user: loggedInUser }
@@ -65,7 +65,7 @@ export const signin = (user) => {
     auth()
     .signInWithEmailAndPassword(user.email, user.password)
     .then((data) => {
-      console.log(data);
+      // console.log(data);
 
       const db = firestore();
       db.collection('users')
