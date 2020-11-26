@@ -16,6 +16,7 @@ function App() {
     if(!auth.authenticated) {
       dispatch(isLoggedInUser())
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
