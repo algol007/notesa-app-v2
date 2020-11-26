@@ -37,6 +37,7 @@ const HomePage = (props) => {
   let unsubscribe;
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     unsubscribe = dispatch(getRealtimeUsers(auth.uid))
     .then(unsubscribe => {
       return unsubscribe;
@@ -55,6 +56,7 @@ const HomePage = (props) => {
         console.log(error)
       })
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // console.log(user);
@@ -113,7 +115,7 @@ const HomePage = (props) => {
           {
             chatStarted ?
             user.conversations.map(conv => 
-              <div key={conv.id} style={{ textAlign: conv.user_uid_1 == auth.uid ? 'right' : 'left' }}>
+              <div key={conv.id} style={{ textAlign: conv.user_uid_1 === auth.uid ? 'right' : 'left' }}>
                   <p className="messageStyle" >{conv.message}</p>
               </div>            
             ) : null
