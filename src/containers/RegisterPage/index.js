@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import Layout from '../../components/Layout';
-import Card from '../../components/UI/Card';
 import { signup } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import './style.css';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 /**
 * @author
@@ -35,53 +33,55 @@ const RegisterPage = (props) => {
   }
 
   return(
-    <Layout>
-      <div className="registerContainer">
-        <Card>
+    <div class="row justify-content-center mt-5" style={{margin: 0}}>
+      <div class="col-md-4">      
+        <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title text-center mb-5">Register</h5>
           <form onSubmit={registerUser}>
-
-            <h3>Sign Up</h3>
-
-            <input 
-              name="firstName"
-              type="text" 
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              placeholder="First Name"
-            />
-
-            <input 
-              name="lastName"
-              type="text" 
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              placeholder="Last Name"
-            />
-
-            <input 
-              name="email"
-              type="text" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-            />
-
-            <input 
-              name="password"
-              type="password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-            />
-
-            <div>
-              <button>Register</button>
+            <div class="form-group">
+              <input name="firstName"
+                class="form-control"
+                type="text" 
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="First Name"
+              />
             </div>
-
+            <div class="form-group">
+              <input name="lastName"
+                class="form-control"
+                type="text" 
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                placeholder="Last Name"
+              />
+            </div>
+            <div class="form-group">
+              <input name="email"
+                class="form-control"
+                type="text" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+              />
+            </div>
+            <div class="form-group">
+              <input name="password"
+                class="form-control"
+                type="password" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+              />
+            </div>
+            <button type="submit" class="btn btn-block btn-primary mt-5">REGISTER</button>
           </form>
-        </Card>
+          <small class="form-text text-center mt-3">Have an account? <Link to="/login"> Login</Link></small>
+        </div>
       </div>
-    </Layout>
+    </div>
+    </div>
   )
 
 }

@@ -10,7 +10,7 @@ const User = (props) => {
   return (
     <div onClick={() => onClick(user)} className="displayName">
         <div className="displayPic">
-            <img src="https://i.pinimg.com/originals/be/ac/96/beac96b8e13d2198fd4bb1d5ef56cdcf.jpg" alt="user-profile-img" />
+            <img src="https://p7.hiclipart.com/preview/355/848/997/computer-icons-user-profile-google-account-photos-icon-account.jpg" alt="user-profile-img" />
         </div>
         <div style={{ display: 'flex', flex: 1, justifyContent: 'space-between', margin: '0 10px'}}>
             <span style={{fontWeight: 500}}>{user.firstName} {user.lastName}</span>
@@ -75,6 +75,7 @@ const HomePage = (props) => {
   }
 
   const submitMessage = (e) => {
+    e.preventDefault();
     const msgObj = {
       id: Date.now(),
       user_uid_1: auth.uid,
@@ -92,8 +93,8 @@ const HomePage = (props) => {
 
   return(
     <Layout>
-    <section className="container">
-      <div className="listOfUsers">
+    <section class="d-flex flex-wrap" style={{margin: 0}}>
+      <div class="listOfUsers">
 
         {
           user.users.length > 0 ?
@@ -107,9 +108,8 @@ const HomePage = (props) => {
             )
           }) : null
         }
-                  
       </div>
-      <div className="chatArea">
+      <div class="chatArea">
         <div className="chatHeader">{ chatStarted ? chatUser : '' }</div>
         <div className="messageSections">
           {
@@ -124,12 +124,22 @@ const HomePage = (props) => {
         {
           chatStarted ? 
           <div className="chatControls">
-              <textarea 
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Write Message"
-              />
-              <button onClick={submitMessage}>Send</button>
+            <form onSubmit={submitMessage}>
+              <div class="form-group" style={{margin: 0}}>
+                <div class="input-group">
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="inlineFormInputGroupUsername" 
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Write Message" />
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Send</div>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div> : null
         }
       </div>
