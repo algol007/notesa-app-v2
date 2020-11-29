@@ -12,6 +12,11 @@ ul {
   padding: 0;
 }
 
+.App {
+  height: 100vh;
+  overflow: hidden;
+}
+
 ul li {
   list-style: none;
 }
